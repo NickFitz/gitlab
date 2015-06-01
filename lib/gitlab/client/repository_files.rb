@@ -60,6 +60,19 @@ class Gitlab::Client
       })
     end
 
+    # Get infiormation about an existing repository file.
+    #
+    # @example
+    #   Gitlab.files(42, :file_path => "path", :ref => "branch")
+    #
+    # @param  [Integer] project The ID of a project.
+    # @param  [String] full path to existing file.
+    # @param  [String] the name of the branch.
+    # @return [Gitlab::ObjectifiedHash]
+    def files(project, options={})
+      get("/projects/#{project}/repository/branches", :query => options)
+    end
+
     private
 
     def encoded_content_attributes(content)
